@@ -28,3 +28,13 @@ def test_tope_maximo_de_q25(monto):
 def test_monto_negativo_es_invalido():
     with pytest.raises(ValueError):
         calcular_comision(-5)
+
+#Set de pruebas extra - Validando fronteras críticas de los tramos de comisión
+@pytest.mark.parametrize("monto, esperado", [
+    (1000,   15.0),   # límite superior del tramo 2 (incluye 1000)
+    (1000.01, 10.0),  # primer centavo del tramo 3
+    (2500,   25.0),   # exactamente donde se activa el tope
+])
+def test_comision_por_tramos(monto, esperado):
+    assert calcular_comision(monto) == esperado
+
