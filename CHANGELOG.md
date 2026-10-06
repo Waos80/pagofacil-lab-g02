@@ -12,3 +12,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y
 - Cálculo del total a debitar (`calcular_total`).
 - Validación del monto (`validar_monto`).
 
+## [1.0.1]
+### Corregido
+- Se incluyo 100 exacto en el tramo sin comisión.
+- Se corrigio el total que se debita al cliente.
+- Validacion de comision no mayor a 25.
