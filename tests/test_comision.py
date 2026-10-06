@@ -38,3 +38,13 @@ def test_monto_negativo_es_invalido():
 def test_comision_por_tramos(monto, esperado):
     assert calcular_comision(monto) == esperado
 
+
+@pytest.mark.parametrize("monto, esperado", [
+    (100.01, round(100.01 * 0.015, 2)),
+])
+def test_comision_por_tramos(monto, esperado):
+    assert calcular_comision(monto) == esperado
+
+def test_tipo_invalido():
+    with pytest.raises(TypeError):
+        calcular_comision("abc")
