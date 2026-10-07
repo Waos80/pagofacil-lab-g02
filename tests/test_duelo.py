@@ -21,3 +21,22 @@ def test_ejemplo_monto_bajo():  # ejemplo que ya pasa; puedes borrarlo o conserv
 
 
 # --- Tus pruebas empiezan aquí ---
+#Set de pruebas extra - Validando fronteras críticas de los tramos de comisión
+@pytest.mark.parametrize("monto, esperado", [
+    (1000,   15.0),   # límite superior del tramo 2 (incluye 1000)
+    (1000.01, 10.0),  # primer centavo del tramo 3
+    (2500,   25.0),   # exactamente donde se activa el tope
+])
+def test_comision_por_tramos(monto, esperado):
+    assert calcular_comision(monto) == esperado
+
+
+@pytest.mark.parametrize("monto, esperado", [
+    (100.01, round(100.01 * 0.015, 2)),
+])
+def test_comision_por_tramos(monto, esperado):
+    assert calcular_comision(monto) == esperado
+
+def test_tipo_invalido():
+    with pytest.raises(TypeError):
+        calcular_comision("abc")
